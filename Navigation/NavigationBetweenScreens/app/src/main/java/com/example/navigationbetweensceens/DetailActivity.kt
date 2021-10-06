@@ -10,12 +10,17 @@ import com.example.navigationbetweensceens.databinding.ActivityDetailBinding
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailBinding
+    companion object {
+        const val LETTER = "letter"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val letterId = "A"
+        //gets the property intent of an activity
+        //extras provides access to all extras passed into the intent
+        val letterId = intent?.extras?.getString(LETTER).toString()
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = WordAdapter(letterId,this)
