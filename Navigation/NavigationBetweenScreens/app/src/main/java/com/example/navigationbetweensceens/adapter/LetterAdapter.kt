@@ -1,6 +1,7 @@
 package com.example.navigationbetweensceens.adapter
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -35,8 +36,16 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>(){
         holder.button.text = item.toString()
         holder.button.setOnClickListener{
             val context = holder.view.context
+            //creates a new activity called detail activity a parameter (index of a letter)
+            //passed through intent
+            /*
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
+            context.startActivity(intent)*/
+
+            //allows you to google search the prefix of the button the user clicked
+            val queryUrl: Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}${item}")
+            val intent = Intent(Intent.ACTION_VIEW, queryUrl)
             context.startActivity(intent)
         }
     }
