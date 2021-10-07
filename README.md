@@ -1,7 +1,7 @@
-# Android-Kotlin-Basics
+## Android-Kotlin-Basics
 Following https://developer.android.com/courses/android-basics-kotlin/course 
 
-###### Activity Lifecycle
+## Activity Lifecycle
 The activity lifecycle is a set of states through which an activity migrates. 
 The activity lifecycle begins when the activity is first created and ends when the activity is destroyed.
 
