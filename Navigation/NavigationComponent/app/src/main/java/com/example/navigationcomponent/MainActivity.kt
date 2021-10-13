@@ -22,21 +22,21 @@ class MainActivity : AppCompatActivity() {
         chooseLayout()
     }
 
-    private fun chooseLayout() {
-        if (isLinearLayout) {
+    private fun chooseLayout(){
+        if(isLinearLayout){
             recyclerView.layoutManager = LinearLayoutManager(this)
-        } else {
+        }
+        else{
             recyclerView.layoutManager = GridLayoutManager(this, 4)
         }
 
         recyclerView.adapter = LetterAdapter()
     }
 
-    private fun setIcon(menuItem: MenuItem?) {
-        if (menuItem == null)
+    private fun setIcon(menuItem: MenuItem?){
+        if(menuItem == null)
             return
-
-        menuItem.icon = if (isLinearLayout)
+        menuItem.icon = if(isLinearLayout)
             ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
         else
             ContextCompat.getDrawable(this, R.drawable.ic_grid_layout)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        return when (item.itemId){
             R.id.action_switch_layout -> {
                 isLinearLayout = !isLinearLayout
                 chooseLayout()
