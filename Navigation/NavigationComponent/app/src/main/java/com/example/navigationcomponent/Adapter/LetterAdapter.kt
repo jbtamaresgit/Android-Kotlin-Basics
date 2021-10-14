@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.navigationcomponent.DetailActivity
+import com.example.navigationcomponent.LetterListFragment
 import com.example.navigationcomponent.R
 
 class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
@@ -27,7 +28,7 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LetterViewHolder {
         val layout = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_view, parent, false)
-        layout.accessibilityDelegate = Accessibility
+        layout.accessibilityDelegate = WordAdapter
         return LetterViewHolder(layout)
     }
 
@@ -36,9 +37,10 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
         holder.button.text = item.toString()
         holder.button.setOnClickListener{
             val context = holder.view.context
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
-            context.startActivity(intent)
+            /*
+            val intent = Intent(context, LetterListFragment::class.java)
+            intent.putExtra(LetterListFragment.LETTER, holder.button.text.toString())
+            context.startActivity(intent)*/
         }
     }
     companion object Accessibility : View.AccessibilityDelegate(){
