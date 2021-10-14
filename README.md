@@ -44,4 +44,8 @@ Similar to activities ```Fragment``` class provides methods that can be override
 - ```DESTROYED```: Fragment object has been de-instantiated.
   - ```onDestroy()```: Enters the ```DESTROYED``` state.
 
-
+## Navigation Components
+- ```NavHostFragment```: The container where the fragments are replaced while navigating.
+- ```NavController```: Conducts the navigation 
+- ```NavigationView```: It is a separate entity outside of the ```NavHostFragment```, a menu for ```DrawerLayout```
+- ```NavigationUI```: Updates the contents outside of the ```NavHostFragment```, E.g., ```NavigationView```, ```BottomNavBar```
