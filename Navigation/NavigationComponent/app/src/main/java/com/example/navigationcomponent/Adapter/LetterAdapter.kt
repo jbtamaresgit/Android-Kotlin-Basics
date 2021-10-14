@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.navigationcomponent.DetailActivity
 import com.example.navigationcomponent.LetterListFragment
+import com.example.navigationcomponent.LetterListFragmentDirections
 import com.example.navigationcomponent.R
 
 class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
@@ -36,11 +37,16 @@ class LetterAdapter : RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
         val item = list.get(position)
         holder.button.text = item.toString()
         holder.button.setOnClickListener{
-            val context = holder.view.context
             /*
-            val intent = Intent(context, LetterListFragment::class.java)
-            intent.putExtra(LetterListFragment.LETTER, holder.button.text.toString())
-            context.startActivity(intent)*/
+val context = holder.view.context
+val intent = Intent(context, LetterListFragment::class.java)
+intent.putExtra(LetterListFragment.LETTER, holder.button.text.toString())
+context.startActivity(intent)*/
+            //LetterListFragmentDirections lets you refer to all possible navigation paths from LetterListFragment
+            //actionletterListFragmentToWordListFragment is a function that was created to specify an action to navigate
+            //to the wordListFragment, it also allows you to pass arguments you specified in nav_graph
+            val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(letter = holder.button.text.toString())
+            holder.view.findNavController().navigate(action)
         }
     }
     companion object Accessibility : View.AccessibilityDelegate(){

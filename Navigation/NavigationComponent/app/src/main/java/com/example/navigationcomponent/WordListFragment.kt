@@ -16,9 +16,15 @@ class WordListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null
     //append !! if the value won't be null when accessed
     private val binding get () = _binding!!
-
+    private lateinit var letterId : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //arguments is possible to be optional and with let() the code
+        //will execute assuming arguments is not null. If the arguments is null,
+        //the lambda will not execute
+        arguments?.let{
+            letterId = it.getString(LETTER).toString()
+        }
     }
 
     override fun onCreateView(
@@ -32,10 +38,10 @@ class WordListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = WordAdapter(letterId, this)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = WordAdapter(letterId, requireContext())
         recyclerView.addItemDecoration(
-            DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         )
     }
 

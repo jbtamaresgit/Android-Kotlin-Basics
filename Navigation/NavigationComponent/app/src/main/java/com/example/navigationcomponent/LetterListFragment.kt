@@ -50,10 +50,10 @@ class LetterListFragment : Fragment() {
 
     private fun chooseLayout(){
         if(isLinearLayout){
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
         else{
-            recyclerView.layoutManager = GridLayoutManager(this, 4)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
         }
 
         recyclerView.adapter = LetterAdapter()
@@ -63,9 +63,9 @@ class LetterListFragment : Fragment() {
         if(menuItem == null)
             return
         menuItem.icon = if(isLinearLayout)
-            ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_linear_layout)
         else
-            ContextCompat.getDrawable(this, R.drawable.ic_grid_layout)
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_grid_layout)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

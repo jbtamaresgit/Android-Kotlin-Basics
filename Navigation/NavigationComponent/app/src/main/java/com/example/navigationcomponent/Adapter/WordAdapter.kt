@@ -11,7 +11,6 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.navigationcomponent.DetailActivity
 import com.example.navigationcomponent.R
 import com.example.navigationcomponent.WordListFragment
 
