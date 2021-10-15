@@ -49,3 +49,9 @@ Similar to activities ```Fragment``` class provides methods that can be override
 - ```NavController```: Conducts the navigation 
 - ```NavigationView```: It is a separate entity outside of the ```NavHostFragment```, a menu for ```DrawerLayout```
 - ```NavigationUI```: Updates the contents outside of the ```NavHostFragment```, E.g., ```NavigationView```, ```BottomNavBar```
+
+## Architecture Components
+``` Android Jetpack ``` libraries are a collection of libraries to create a better Android apps. The libraries allows you to follow best practices, free from boilerplate codes, and simplify complex task.
+``` Android Architecture Components ``` are part of ```Android Jetpack``` libraries, allows you to design apps with good architecture.
+###### App Architecture
+- Set of design rules that provides the structure of your app.
