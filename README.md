@@ -53,5 +53,15 @@ Similar to activities ```Fragment``` class provides methods that can be override
 ## Architecture Components
 ``` Android Jetpack ``` libraries are a collection of libraries to create a better Android apps. The libraries allows you to follow best practices, free from boilerplate codes, and simplify complex task.
 ``` Android Architecture Components ``` are part of ```Android Jetpack``` libraries, allows you to design apps with good architecture.
-###### App Architecture
+## App Architecture
 - Set of design rules that provides the structure of your app.
+###### Separation of Concerns
+App should be divided into classes, each with separate responsibilities
+###### Drive UI from a model
+- A principle that drives your UI from a model, preferably a persistent model. **Models** are components that are responsible for handling the data for an app. They are independent from ```Views``` and app components in the app, so they are unaffected by the app's lifecycle and the associated concerns.
+- The main classes or components in an android architecture are ```UI Controller``` (```Activity/Fragment```), ```ViewModel```, ```LiveData```, and ```Room```. These components takes care some of the complexity of the lifecycle and help you avoid lifecycle related issues. 
+- ```UI Controller``` 
+  - Displays data and capture user events, in other words, anything else related to the UI that the user interacts with. Data in the app or any decision-making logic about data, it should not be in the UI Controller classes since there are events that are not under your control, such as system conditions like low memory.
+- ```ViewModel``` 
+  - Holds all the data needed for the UI and prepares it for display. It should never access view hierarchy (like view binding object) or hold a reference to the activity or the fragment
+  - Stores the app related data that is not destroyed when an activity or fragment is destroyed and recreated by the Android framework. ```ViewModel``` objects are automatically retained (they are not destroyed like the activity or a fragment instance) during configuration changes so that the data they hold is immediately available to the next activity or fragment instance.
