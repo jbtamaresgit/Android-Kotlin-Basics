@@ -83,3 +83,9 @@ Property ```_count``` is private and mutable. Hence, it is only accessible insid
 ```  
 Never expose mutable data fields from the **ViewModel**, make sure that the mutable variables cannot be modified from other classes.  
 ```  
+## Lifecycle of a ViewModel
+- The framework keeps the ```ViewModel``` live as long as the scope of the activity or the fragment is alive. 
+- It is not destroyed if the owner is destroyed for a configuration change, such as screen rotation.
+- A new instance of the owner reconnects to the existing ```ViewModel``` instance.
+![image](https://user-images.githubusercontent.com/44351076/137698864-fa2628b8-baf5-46f0-b989-170ef48f41e2.png)
+###### image taken from : https://developer.android.com/codelabs/basic-android-kotlin-training-viewmodel
