@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.architecturecomponent.R
 import com.example.architecturecomponent.databinding.GameFragmentBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
     private val viewModel : GameViewModel by viewModels()
@@ -80,6 +81,20 @@ class GameFragment : Fragment() {
 
     private fun updateNextWordOnScreen(){
         binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
+    }
+
+    private fun showFinalScoreDialog(){
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.congratulations))
+            .setMessage(getString(R.string.you_scored, viewModel.score))
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.exit)){_, _ ->
+                exitGame()
+            }
+            .setPositiveButton(getString(R.string.play_again)){_,_ ->
+                restartGame()
+            }
+            .show()
     }
 
 

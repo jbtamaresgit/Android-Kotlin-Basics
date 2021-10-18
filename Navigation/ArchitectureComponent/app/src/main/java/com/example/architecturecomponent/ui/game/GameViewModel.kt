@@ -1,6 +1,9 @@
 package com.example.architecturecomponent.ui.game
 
+
 import androidx.lifecycle.ViewModel
+import com.example.architecturecomponent.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameViewModel : ViewModel() {
     private var score = 0
@@ -8,6 +11,9 @@ class GameViewModel : ViewModel() {
     private var _currScrambledWord = "test"
     val currentScrambledWord : String
         get() = _currScrambledWord
+    private var _score = 0
+    val score: Int
+        get() = _score
     //stores the words fetched from allWordsList
     private var wordList : MutableList<String> = mutableListOf()
     private lateinit var currWord: String
@@ -41,5 +47,4 @@ class GameViewModel : ViewModel() {
             true
         } else false
     }
-
 }
