@@ -2,26 +2,15 @@ package com.example.architecturecomponent.ui.game
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.architecturecomponent.R
 import com.example.architecturecomponent.databinding.GameFragmentBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GameFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameFragment : Fragment() {
-    private var score = 0
-    private var currWordCount = 0
-    private var currScrambledWord = "test"
+    private val viewModel : GameViewModel by viewModels()
     private lateinit var binding : GameFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,7 +79,7 @@ class GameFragment : Fragment() {
     }
 
     private fun updateNextWordOnScreen(){
-        binding.textViewUnscrambledWord.text = currScrambledWord
+        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
     }
 
 
