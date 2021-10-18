@@ -74,6 +74,6 @@ App should be divided into classes, each with separate responsibilities
 
 ###### Backing Property
 - Allows you to return something from a getter. e.g.
-```private var _count = 0  
+private var _count = 0  
 val count: Int  
-  get() = _count```
+get() = _count  
