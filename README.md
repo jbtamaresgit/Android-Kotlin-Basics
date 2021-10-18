@@ -65,3 +65,9 @@ App should be divided into classes, each with separate responsibilities
 - ```ViewModel``` 
   - Holds all the data needed for the UI and prepares it for display. It should never access view hierarchy (like view binding object) or hold a reference to the activity or the fragment
   - Stores the app related data that is not destroyed when an activity or fragment is destroyed and recreated by the Android framework. ```ViewModel``` objects are automatically retained (they are not destroyed like the activity or a fragment instance) during configuration changes so that the data they hold is immediately available to the next activity or fragment instance.
+
+###### Kotlin Property Delegate
+- Provides getter-setter responsibility to a different class
+- A delegate property is defined using the ```by``` clause and a ```delegate-class``` instance:
+```var property-name : property-type by delegate-class()```
+- In the app, if the ```ViewModel``` is initialised using a default constructor e.g. ```var viewModel = yourViewModel()``` then the app will lose its configuration during configuration change. For example, rotation of a device will cause the activity to be destroyed and re-created, and a new view model will have a new instance again.
