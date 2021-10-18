@@ -71,3 +71,9 @@ App should be divided into classes, each with separate responsibilities
 - A delegate property is defined using the ```by``` clause and a ```delegate-class``` instance:
 ```var property-name : property-type by delegate-class()```
 - In the app, if the ```ViewModel``` is initialised using a default constructor e.g. ```var viewModel = yourViewModel()``` then the app will lose its configuration during configuration change. For example, rotation of a device will cause the activity to be destroyed and re-created, and a new view model will have a new instance again.
+
+###### Backing Property
+- Allows you to return something from a getter. e.g.
+```private var _count = 0  
+val count: Int  
+  get() = _count```
