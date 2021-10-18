@@ -80,3 +80,6 @@ val count: Int
 get() = _count  
 ```  
 Property ```_count``` is private and mutable. Hence, it is only accessible inside the ```ViewModel```. To access the value of the ```_count``` creation of a ```property``` is needed such aso overriding ```get()``` method, however, using the ```get()``` will only allow the property to be **immutable** and **read-only**.  
+```  
+Never expose mutable data fields from the **ViewModel**, make sure that the mutable variables cannot be modified from other classes.  
+```  
