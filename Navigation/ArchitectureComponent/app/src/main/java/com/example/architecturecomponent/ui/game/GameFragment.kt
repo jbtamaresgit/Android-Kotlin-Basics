@@ -11,8 +11,8 @@ import com.example.architecturecomponent.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameFragment : Fragment() {
-    private val viewModel : GameViewModel by viewModels()
-    private lateinit var binding : GameFragmentBinding
+    private val viewModel: GameViewModel by viewModels()
+    private lateinit var binding: GameFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,42 +30,47 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.submit.setOnClickListener { onSubmitWord() }
-        binding.skip.setOnClickListener{ onSkipWord() }
+        binding.skip.setOnClickListener { onSkipWord() }
         updateNextWordOnScreen()
         binding.score.text = getString(R.string.score, 0)
         binding.wordCount.text = getString(R.string.word_count, 0, MAX_NO_OF_WORDS)
     }
 
-    private fun onSubmitWord(){
-        currScrambledWord = getNextScrambledWord()
-        currWordCount++
-        score += SCORE_INCREASE
-        binding.wordCount.text = getString(R.string.word_count, currWordCount, MAX_NO_OF_WORDS)
-        binding.score.text = getString(R.string.score, score)
+    private fun onSubmitWord() {
+        //fetch the player input from the view
+        val playerWord = binding.textInputEditText.text.toString()
+        //use view model to check the user input
+        if (viewModel.isUserInputWordCorrect(playerWord)) {
+            //if correct, error would not be shown
+            setErrorTextField(false)
+            //checks if fetching the next word is possible,
+            //if not, final score dialog is shown
+            if (viewModel.nextWord()) {
+                updateNextWordOnScreen()
+            } else {
+                showFinalScoreDialog()
+            }
+        } else {
+            setErrorTextField(true)
+        }
+    }
+
+    private fun onSkipWord() {
+        if(viewModel.nextWord()){
+            setErrorTextField(false)
+            updateNextWordOnScreen()
+        } else {
+            showFinalScoreDialog()
+        }
+    }
+
+    private fun restartGame() {
+        viewModel.reinitialiseData()
         setErrorTextField(false)
         updateNextWordOnScreen()
     }
 
-    private fun onSkipWord(){
-        currScrambledWord = getNextScrambledWord()
-        currWordCount++
-        binding.wordCount.text = getString(R.string.word_count, currWordCount, MAX_NO_OF_WORDS)
-        setErrorTextField(false)
-        updateNextWordOnScreen()
-    }
-
-    private fun getNextScrambledWord() : String {
-        val tempWord = allWordsList.random().toCharArray()
-        tempWord.shuffle()
-        return String(tempWord)
-    }
-
-    private fun restartGame(){
-        setErrorTextField(false)
-        updateNextWordOnScreen()
-    }
-
-    private fun exitGame(){
+    private fun exitGame() {
         activity?.finish()
     }
 
@@ -79,19 +84,19 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun updateNextWordOnScreen(){
+    private fun updateNextWordOnScreen() {
         binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
     }
 
-    private fun showFinalScoreDialog(){
+    private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.you_scored, viewModel.score))
             .setCancelable(false)
-            .setNegativeButton(getString(R.string.exit)){_, _ ->
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
                 exitGame()
             }
-            .setPositiveButton(getString(R.string.play_again)){_,_ ->
+            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
                 restartGame()
             }
             .show()
