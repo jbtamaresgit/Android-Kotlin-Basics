@@ -1,19 +1,21 @@
 package com.example.architecturecomponent.ui.game
 
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.architecturecomponent.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class GameViewModel : ViewModel() {
-    private var _currWordCount = 0
-    val currWordCount : Int
+    private var _currWordCount = MutableLiveData(0)
+    val currWordCount : LiveData<Int>
         get() = _currWordCount
-    private var _currScrambledWord = "test"
-    val currentScrambledWord : String
+    private var _currScrambledWord = MutableLiveData<String>()
+    val currentScrambledWord : LiveData<String>
         get() = _currScrambledWord
-    private var _score = 0
-    val score: Int
+    private var _score = MutableLiveData(0)
+    val score: LiveData<Int>
         get() = _score
     //stores the words fetched from allWordsList
     private var wordList : MutableList<String> = mutableListOf()
@@ -37,8 +39,9 @@ class GameViewModel : ViewModel() {
                 tempWord.shuffle()
             }
 
-            _currScrambledWord = String(tempWord)
-            ++_currWordCount
+            _currScrambledWord.value = String(tempWord)
+            //null-safety live data increment
+            _currWordCount.value = (_currWordCount.value)?.inc()
             wordList.add(currWord)
         }
 
@@ -46,7 +49,7 @@ class GameViewModel : ViewModel() {
     //Accessed in game fragment and returns true if the current word count is less than the max no of words
     //updates the next word
     fun nextWord(): Boolean{
-        return if(currWordCount < MAX_NO_OF_WORDS){
+        return if(_currWordCount.value!! < MAX_NO_OF_WORDS){
             getNextWord()
             true
         } else false
@@ -61,13 +64,13 @@ class GameViewModel : ViewModel() {
     }
 
     fun reinitialiseData() {
-        _score = 0
-        _currWordCount = 0
+        _score.value = 0
+        _currWordCount.value = 0
         wordList.clear()
         getNextWord()
     }
 
     private fun increaseScore(){
-        _score += SCORE_INCREASE
+        _score.value = (_score.value)?.plus(SCORE_INCREASE)
     }
 }
