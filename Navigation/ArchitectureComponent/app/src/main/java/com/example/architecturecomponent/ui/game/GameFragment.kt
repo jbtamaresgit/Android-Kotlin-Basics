@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.architecturecomponent.R
 import com.example.architecturecomponent.databinding.GameFragmentBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,18 +24,21 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = GameFragmentBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.gameViewModel = viewModel
+        binding.maxNoOfWords = MAX_NO_OF_WORDS
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
         binding.score.text = getString(R.string.score, 0)
         binding.wordCount.text = getString(R.string.word_count, 0, MAX_NO_OF_WORDS)
-        //creates an observer for livedata -- usually created at onViewCreated
-        viewModel.currentScrambledWord.observe(viewLifecycleOwner,{
+        //creates an observer for livedata -- usually created at onViewCreated -- viewBinding process
+        /*viewModel.currentScrambledWord.observe(viewLifecycleOwner,{
             newWord -> binding.textViewUnscrambledWord.text = newWord
         })
         viewModel.currWordCount.observe(viewLifecycleOwner,{
@@ -42,7 +46,7 @@ class GameFragment : Fragment() {
         })
         viewModel.score.observe(viewLifecycleOwner,{
             newScore -> binding.score.text = getString(R.string.score, newScore)
-        })
+        })*/
     }
 
     private fun onSubmitWord() {

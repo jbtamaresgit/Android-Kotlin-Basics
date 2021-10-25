@@ -1,8 +1,12 @@
 package com.example.architecturecomponent.ui.game
 
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.TtsSpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.architecturecomponent.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,8 +16,25 @@ class GameViewModel : ViewModel() {
     val currWordCount : LiveData<Int>
         get() = _currWordCount
     private var _currScrambledWord = MutableLiveData<String>()
-    val currentScrambledWord : LiveData<String>
-        get() = _currScrambledWord
+    //val currentScrambledWord : LiveData<String>
+      //  get() = _currScrambledWord
+
+    val currentScrambledWord: LiveData<Spannable> = Transformations.map(_currScrambledWord) {
+        if (it == null) {
+            SpannableString("")
+        } else {
+            val scrambledWord = it.toString()
+            val spannable: Spannable = SpannableString(scrambledWord)
+            spannable.setSpan(
+                TtsSpan.VerbatimBuilder(scrambledWord).build(),
+                0,
+                scrambledWord.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            spannable
+        }
+    }
+
     private var _score = MutableLiveData(0)
     val score: LiveData<Int>
         get() = _score
