@@ -96,3 +96,4 @@ Characteristics of ```Livedata```
   - ```Livedata``` holds data; it is a wrapper that can be used with any type of data.
   - It is observable, an observer is notified when th data held by it changes.
   - It is lifecycle-aware. Attaching an observer to the ```Livedata```, the observer is associated with a ```LifecycleOwner``` usually an ```Activity``` or ```Fragment``` . It only updates the observers that are in an active lifecycle state, such as ```STARTED``` and ```RESUME```.
+- ```MutableLiveData``` is a mutable version of ```LiveData```, that is that the value can be changed.
