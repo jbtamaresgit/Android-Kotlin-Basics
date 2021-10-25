@@ -97,3 +97,15 @@ Characteristics of ```Livedata```
   - It is observable, an observer is notified when th data held by it changes.
   - It is lifecycle-aware. Attaching an observer to the ```Livedata```, the observer is associated with a ```LifecycleOwner``` usually an ```Activity``` or ```Fragment``` . It only updates the observers that are in an active lifecycle state, such as ```STARTED``` and ```RESUME```.
 - ```MutableLiveData``` is a mutable version of ```LiveData```, that is that the value can be changed.
+
+###### Data Binding
+- Binds the UI components in the layouts to data sources in the app using a declarative format.
+- View Binding in UI Controller  
+```  
+binding.yourUIid.text = viewModel.LiveDataVariable  
+```  
+- Data Binding in the layout file, usually denoted by the use of ```@{ }``` syntax  
+```  
+android:text="@{yourViewModel.LiveDataVariable}"  
+```  
+- Updating from viewBinding to mdataBinding in app module gradle ```dataBinding = true```
