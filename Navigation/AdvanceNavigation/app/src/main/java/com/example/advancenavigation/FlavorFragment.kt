@@ -31,6 +31,8 @@ class FlavorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply{
+            //gets the view model from the fragment_flavor.xml and bind it to the sharedViewModel [OrderVM]
+            viewModel = sharedViewModel
             nextButton.setOnClickListener{ goToNextScreen() }
         }
     }
