@@ -33,7 +33,10 @@ class FlavorFragment : Fragment() {
         binding?.apply{
             //gets the view model from the fragment_flavor.xml and bind it to the sharedViewModel [OrderVM]
             viewModel = sharedViewModel
-            nextButton.setOnClickListener{ goToNextScreen() }
+            //sets the lifecycleOwner to observe LiveData objects
+            lifecycleOwner = viewLifecycleOwner
+            //bind fragment data variable with the fragment instance
+            flavorFragment = this@FlavorFragment
         }
     }
 

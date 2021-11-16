@@ -28,12 +28,16 @@ class SummaryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            //gets the view model from the fragment_flavor.xml and bind it to the sharedViewModel [OrderVM]
             viewModel = sharedViewModel
-            sendButton.setOnClickListener{ sendOrder() }
+            //sets the lifecycleOwner to observe LiveData objects
+            lifecycleOwner = viewLifecycleOwner
+            //bind fragment data variable with the fragment instance
+            summaryFragment = this@SummaryFragment
         }
     }
 
-    private fun sendOrder() {
+    fun sendOrder() {
         Toast.makeText(activity, "Send Order", Toast.LENGTH_SHORT).show()
     }
 

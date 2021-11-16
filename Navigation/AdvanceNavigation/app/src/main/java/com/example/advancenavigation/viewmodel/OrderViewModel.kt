@@ -2,10 +2,13 @@ package com.example.advancenavigation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+//compile time constants
 private const val PRICE_PER_CUPCAKE = 2.00
 private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
@@ -21,8 +24,11 @@ class OrderViewModel : ViewModel() {
     private val _date = MutableLiveData<String>()
     val date: LiveData<String> = _date
 
+    //Transforms the price into a string currency format
     private val _price = MutableLiveData<Double>()
-    val price: LiveData<Double> = _price
+    val price: LiveData<String> = Transformations.map(_price){
+        NumberFormat.getCurrencyInstance().format(it)
+    }
 
     fun setQuantity(numberCupcakes: Int){
         _quantity.value = numberCupcakes
@@ -62,7 +68,7 @@ class OrderViewModel : ViewModel() {
         return options
     }
 
-    fun resetOrder(){
+    private fun resetOrder(){
         _quantity.value = 0
         _flavor.value = ""
         _date.value = dateOptions[0]
