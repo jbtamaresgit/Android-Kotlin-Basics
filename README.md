@@ -113,3 +113,19 @@ android:text="@{yourViewModel.LiveDataVariable}"
 ###### Shared View Models 
 - ```viewModels()``` gives you the ```ViewModel``` instance scoped to the **current fragment**.
 - ```activityViewModels()``` gives you the ```ViewModel``` instance scoped to the **current activity**. 
+
+###### Scope Function
+- ```apply``` - is a scope function in Kotlin Standard Library. It executes a block of code w/in the context of an object. It forms a temporary scope, and in the scope, you can access the object without its name. Its common use case is to **configure** an object. e.g.  
+```  
+clark.apply {
+    firstName = "Clark"
+    lastName = "James"
+    age = 18
+}  
+```
+The equivalent code without the ```apply``` scope function would be:  
+```  
+clark.firstName = "Clark"
+clark.lastName = "James"
+clark.age = 18
+```  
