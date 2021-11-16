@@ -129,3 +129,6 @@ clark.firstName = "Clark"
 clark.lastName = "James"
 clark.age = 18
 ```  
+###### Listener Bindings
+Are lambda expressions that runs when an event happens, which is similar to ```onClick``` event, but the listener bindings lets you run arbitrary data binding expressions.  
+E.g. ```android:onClick="@{() -> viewModel.yourVMFunction(yourParameter)}"```  
