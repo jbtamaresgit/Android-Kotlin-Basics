@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.advancenavigation.databinding.FragmentFlavorBinding
 
 class FlavorFragment : Fragment() {
@@ -30,7 +31,7 @@ class FlavorFragment : Fragment() {
     }
 
     fun goToNextScreen(){
-        Toast.makeText(activity, "Next", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
     }
 
     override fun onDestroyView() {
