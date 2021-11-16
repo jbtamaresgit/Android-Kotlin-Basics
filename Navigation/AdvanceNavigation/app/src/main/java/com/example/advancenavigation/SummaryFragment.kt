@@ -6,10 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.advancenavigation.databinding.FragmentSummaryBinding
+import com.example.advancenavigation.viewmodel.OrderViewModel
 
 class SummaryFragment : Fragment() {
     private var binding: FragmentSummaryBinding? = null
+
+    //get reference to shared view model
+    private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
