@@ -110,6 +110,8 @@ android:text="@{yourViewModel.LiveDataVariable}"
 ```  
 - Updating from viewBinding to mdataBinding in app module gradle ```dataBinding = true```
 
+## Advance Navigation
+
 ###### Shared View Models 
 - ```viewModels()``` gives you the ```ViewModel``` instance scoped to the **current fragment**.
 - ```activityViewModels()``` gives you the ```ViewModel``` instance scoped to the **current activity**. 
