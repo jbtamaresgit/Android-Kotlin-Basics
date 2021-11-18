@@ -132,3 +132,7 @@ clark.age = 18
 ###### Listener Bindings
 Are lambda expressions that runs when an event happens, which is similar to ```onClick``` event, but the listener bindings lets you run arbitrary data binding expressions.  
 E.g. ```android:onClick="@{() -> viewModel.yourVMFunction(yourParameter)}"```  
+
+###### Tasks
+Activities exists within tasks. A _task_ is a collection of activities that the user interacts with when performing a certain job. (e.g. taking a photo).  
+Activities are arranged in a stack, known as _back stack_ or arranged in a _FILO_.
