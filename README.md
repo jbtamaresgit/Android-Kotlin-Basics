@@ -110,6 +110,8 @@ android:text="@{yourViewModel.LiveDataVariable}"
 ```  
 - Updating from viewBinding to mdataBinding in app module gradle ```dataBinding = true```
 
+## Advance Navigation
+
 ###### Shared View Models 
 - ```viewModels()``` gives you the ```ViewModel``` instance scoped to the **current fragment**.
 - ```activityViewModels()``` gives you the ```ViewModel``` instance scoped to the **current activity**. 
@@ -132,3 +134,10 @@ clark.age = 18
 ###### Listener Bindings
 Are lambda expressions that runs when an event happens, which is similar to ```onClick``` event, but the listener bindings lets you run arbitrary data binding expressions.  
 E.g. ```android:onClick="@{() -> viewModel.yourVMFunction(yourParameter)}"```  
+
+###### Tasks
+Activities exists within tasks. A _task_ is a collection of activities that the user interacts with when performing a certain job. (e.g. taking a photo).  
+Activities are arranged in a stack, known as _back stack_ or arranged in a _FILO_.
+
+###### Navigation action: popUpTo attribute (nav_graph)
+```app:popUpTo``` attribute allows you to pop off more than one destination under the back stack, up until the specified destination is reached. For example, specifying ```app:popUpTo="@id/startFragment"``` destinations in the back stack will get popped off until upon reaching ```StartFragment``` which will remain in the stack. However, it adds another ```StartFragment``` as a new destination on the back stack, ending up with two instances of the fragment. Hence, you have to tap **Back** twice in order to leave the app.
