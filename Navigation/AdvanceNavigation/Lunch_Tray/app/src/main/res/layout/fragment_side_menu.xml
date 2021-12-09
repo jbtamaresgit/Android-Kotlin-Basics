@@ -1,14 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_side_menu"
     tools:context=".ui.order.SideMenuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <data>
+       <variable
+           name="viewModel"
+           type="com.example.lunchtray.model.OrderViewModel" />
 
-</FrameLayout>
+       <!-- TODO: add data binding variable for the SideMenuFragment -->
+   </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/side_margin"
+            android:paddingEnd="@dimen/side_margin"
+            android:paddingBottom="@dimen/side_margin">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/side_options"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- TODO bind to OrderVM when RadioButton is clicked -->
+                <!-- Side 1 -->
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/salad"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:text='@{viewModel.menuItems["salad"].name}'
+                    tools:text="Side 1"/>
+
+                <TextView
+                    android:id="@+id/salad_description"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:text='@{viewModel.menuItems["salad"].description}'
+                    tools:text="Side 1 description"/>
+
+                <TextView
+                    android:id="@+id/salad_price"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:paddingTop="@dimen/base_margin"
+                    android:text='@{viewModel.menuItems["salad"].getFormattedPrice()}'
+                    tools:text="$0.00"/>
+
+                <View
+                    style="@style/Widget.LunchTray.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salad_description" />
+
+                <!-- Side 2 -->
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/soup"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:text='@{viewModel.menuItems["soup"].name}'
+                    tools:text="Side 2"/>
+
+                <TextView
+                    android:id="@+id/soup_description"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:text='@{viewModel.menuItems["soup"].description}'
+                    tools:text="Side 2 description"/>
+
+                <TextView
+                    android:id="@+id/soup_price"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:paddingTop="@dimen/base_margin"
+                    android:text='@{viewModel.menuItems["soup"].getFormattedPrice()}'
+                    tools:text="$0.00"/>
+
+                <View
+                    style="@style/Widget.LunchTray.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/soup_description" />
+
+                <!-- Side 3 -->
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/potatoes"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:text='@{viewModel.menuItems["potatoes"].name}'
+                    tools:text="Side 3"/>
+
+                <TextView
+                    android:id="@+id/potatoes_description"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:text='@{viewModel.menuItems["potatoes"].description}'
+                    tools:text="Side 3 description"/>
+
+                <TextView
+                    android:id="@+id/potatoes_price"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:paddingTop="@dimen/base_margin"
+                    android:text='@{viewModel.menuItems["potatoes"].getFormattedPrice()}'
+                    tools:text="$0.00"/>
+
+                <View
+                    style="@style/Widget.LunchTray.Divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/potatoes_description" />
+
+                <!-- Side 4 -->
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rice"
+                    android:textAppearance="?attr/textAppearanceBody1"
+                    android:text='@{viewModel.menuItems["rice"].name}'
+                    tools:text="Side 4"/>
+
+                <TextView
+                    android:id="@+id/rice_description"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:text='@{viewModel.menuItems["rice"].description}'
+                    tools:text="Side 4 description"/>
+
+                <TextView
+                    android:id="@+id/rice_price"
+                    style="@style/Widget.MenuItem.TextView.Info"
+                    android:paddingTop="@dimen/base_margin"
+                    android:text='@{viewModel.menuItems["rice"].getFormattedPrice()}'
+                    tools:text="$0.00"/>
+
+            </RadioGroup>
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Widget.LunchTray.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/base_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/side_options" />
+
+            <TextView
+                android:id="@+id/subtotal"
+                style="@style/Widget.LunchTray.TextView.Subtotal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:text="Subtotal $5.00"/>
+
+            <!-- TODO: cancel the order when clicked -->
+            <Button
+                android:id="@+id/cancel_button"
+                style="@style/Widget.Order.Button.Cancel"
+                app:layout_constraintEnd_toStartOf="@id/next_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/next_button" />
+
+            <!-- TODO: go to the next screen when clicked -->
+            <Button
+                android:id="@+id/next_button"
+                style="@style/Widget.Order.Button.Next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@id/subtotal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
