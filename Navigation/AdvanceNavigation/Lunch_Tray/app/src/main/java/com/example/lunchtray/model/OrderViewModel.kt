@@ -11,7 +11,7 @@ import java.text.NumberFormat
 class OrderViewModel : ViewModel() {
 
     //map of menu items
-    val menu = DataSource.menuItems
+    val menuItems = DataSource.menuItems
 
     //default values of price
     private var previousEntreePrice = 0.0
@@ -53,27 +53,82 @@ class OrderViewModel : ViewModel() {
     //TODO: update subtotal to reflect the price of the selected item
 
     fun setEntree(entree: String){
+        var currSubTotal = _subtotal.value
 
+        if(_entree.value != null){
+            previousEntreePrice = _entree.value?.price!!
+        }
+
+        if(currSubTotal == null){
+            if (previousEntreePrice != null) {
+                currSubTotal = currSubTotal?.minus(previousEntreePrice)
+            }
+        }
+
+        _entree.value = menuItems.getValue(entree)
+        _entree.value?.price?.let { updateSubTotal(it) }
     }
 
     fun setSide(side: String){
+        var currSubTotal = _subtotal.value
 
+        if(_side.value != null){
+            previousSidePrice = _side.value?.price!!
+        }
+
+        if(currSubTotal == null){
+            if (previousSidePrice != null) {
+                currSubTotal = currSubTotal?.minus(previousSidePrice)
+            }
+        }
+
+        _side.value = menuItems.getValue(side)
+        _side.value?.price?.let { updateSubTotal(it) }
     }
 
     fun setAccompaniment(accompaniment: String){
+        var currSubTotal = _subtotal.value
 
+        if(_accompaniment.value != null){
+            previousAccompanimentPrice = _accompaniment.value?.price!!
+        }
+
+        if(currSubTotal == null){
+            if (previousAccompanimentPrice != null) {
+                currSubTotal = currSubTotal?.minus(previousAccompanimentPrice)
+            }
+        }
+
+        _accompaniment.value = menuItems.getValue(accompaniment)
+        _accompaniment.value?.price?.let { updateSubTotal(it) }
     }
 
     //TODO: Calculate subtotal, tax
-    private fun udpateSubtotal(itemPrice: Double){
+    private fun updateSubTotal(itemPrice: Double){
+        var currSubtotal = _subtotal.value
+        if(currSubtotal != null){
+            currSubtotal += itemPrice
+        }else{
+            currSubtotal = itemPrice
+        }
 
+        _subtotal.value = currSubtotal
+        calculateTaxAndTotal()
     }
 
     fun calculateTaxAndTotal(){
-
+        _tax.value = taxRate * _subtotal.value!!
+        _total.value = _subtotal.value!! + _tax.value!!
     }
 
-    fun resetOrder(){}
+    fun resetOrder(){
+        _subtotal.value = null
+        _tax.value = 0.0
+        _total.value = 0.0
+        _accompaniment.value = null
+        _side.value = null
+        _entree.value = null
+    }
 
 
 }
