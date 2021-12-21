@@ -59,9 +59,10 @@ class OrderViewModel : ViewModel() {
             previousEntreePrice = _entree.value?.price!!
         }
 
-        if(currSubTotal == null){
+        if(_subtotal.value == null){
             if (previousEntreePrice != null) {
                 currSubTotal = currSubTotal?.minus(previousEntreePrice)
+                _subtotal.value = currSubTotal
             }
         }
 
@@ -79,6 +80,7 @@ class OrderViewModel : ViewModel() {
         if(currSubTotal == null){
             if (previousSidePrice != null) {
                 currSubTotal = currSubTotal?.minus(previousSidePrice)
+                _subtotal.value = currSubTotal
             }
         }
 
@@ -96,6 +98,7 @@ class OrderViewModel : ViewModel() {
         if(currSubTotal == null){
             if (previousAccompanimentPrice != null) {
                 currSubTotal = currSubTotal?.minus(previousAccompanimentPrice)
+                _subtotal.value = currSubTotal
             }
         }
 
@@ -116,7 +119,7 @@ class OrderViewModel : ViewModel() {
         calculateTaxAndTotal()
     }
 
-    fun calculateTaxAndTotal(){
+    private fun calculateTaxAndTotal(){
         _tax.value = taxRate * _subtotal.value!!
         _total.value = _subtotal.value!! + _tax.value!!
     }
