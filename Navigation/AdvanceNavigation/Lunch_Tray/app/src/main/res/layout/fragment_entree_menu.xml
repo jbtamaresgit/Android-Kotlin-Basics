@@ -9,6 +9,9 @@
             name="viewModel"
             type="com.example.lunchtray.model.OrderViewModel" />
 
+        <variable
+            name="entreeMenuFragment"
+            type="com.example.lunchtray.ui.order.EntreeMenuFragment"/>
         <!-- TODO: Add the data binding variable for the EntreeMenuFragment -->
     </data>
 
